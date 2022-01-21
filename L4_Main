@@ -1,1 +1,23 @@
+//Articuno Systems
+//Made by Hyun Ki David Lee
+//L4_main
+//---------------
 
+#include ___
+
+void setup(){
+  pinMode(##, OUT):
+  pinMode(##, OUT):
+  pinMode(##, OUT):
+  pinMode(##, OUT):
+  pinMode(##, OUT):
+}
+
+void loop(){
+  //Collect wifi data
+  if("Temperature below freezing){ //Temperature is too cold
+  digitalWrite(##, HIGH): //Turn on Compressor Relay
+  }
+  else{ //Temperature is warm enough
+  }
+}
