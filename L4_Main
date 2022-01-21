@@ -1,23 +1,48 @@
 //Articuno Systems
+//Project Manager: Bradley Hartman
+//Hardware Engineer: Dylan Hromcik
+//Integration Engineer: Nathan Armstrong
+//Software Engineer: Hyun Ki David Lee
+//---------------
 //Made by Hyun Ki David Lee
 //L4_main
-//---------------
 
 #include ___
 
 void setup(){
+//SETUP PINS----------
+  pinMode(##, OUT): //Set Relay1 pin to OUT
+  pinMode(##, OUT): //Set Relay2 pin to OUT
+  pinMode(##, OUT): //Set Relay3 pin to OUT
+  pinMode(##, OUT): //Set Relay4 pin to OUT
   pinMode(##, OUT):
-  pinMode(##, OUT):
-  pinMode(##, OUT):
-  pinMode(##, OUT):
-  pinMode(##, OUT):
+//SETUP VARIABLES----------
+  float flow1 = 0.000; //Flow Rate to sprinkler Head 1
+  float flow2 = 0.000; //Flow Rate to sprinkler Head 2
+  float flow3 = 0.000; //Flow Rate to sprinkler Head 3
+  float flow4 = 0.000; //Flow Rate to sprinkler Head 4
+//CONNECT TO WIFI----------
 }
-
+//--------------------------------
 void loop(){
-  //Collect wifi data
+//COLLECT WEATHER DATA----------
+
+//UPDATE FLOW RATE DATA----------
+  
+//FREEZE CHECK----------
   if("Temperature below freezing){ //Temperature is too cold
   digitalWrite(##, HIGH): //Turn on Compressor Relay
   }
   else{ //Temperature is warm enough
   }
+  
+//WATERING CHECK----------
+  if("time since last watering > #"){
+  }
+  else{
+  }
+//LEAK & CLOG CHECK----------
+
+//DISPLAY INFO----------
+
 }
