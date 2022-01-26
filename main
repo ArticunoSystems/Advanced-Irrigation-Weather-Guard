@@ -5,7 +5,7 @@
 //Software Engineer: Hyun Ki David Lee
 //---------------
 //Made by Hyun Ki David Lee
-//L4_main
+//main
 
 #include ___
 
@@ -31,13 +31,19 @@ void loop(){
   
 //FREEZE CHECK----------
   if("Temperature below freezing){ //Temperature is too cold
-  digitalWrite(##, HIGH): //Turn on Compressor Relay
+  Serial.write("Conducting Freeze Purge. \n") //Serial message
+  digitalWrite(##, HIGH): //Turn ON Purge Status LED
+  digitalWrite(##, HIGH): //Turn ON Compressor Relay
+  delay(#0000): //Runs purge mode for # amount of time
+  digitalWrite(##, LOW): //Turn OFF Purge Status LED
+  digitalWrite(##, LOW): //Turn OFF Compressor Relay
   }
   else{ //Temperature is warm enough
   }
   
 //WATERING CHECK----------
   if("time since last watering > #"){
+  digitalWrite(##, HIGH): //Open Valve 1
   }
   else{
   }
