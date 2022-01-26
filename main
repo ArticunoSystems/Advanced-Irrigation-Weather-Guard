@@ -17,12 +17,14 @@ void setup(){
   pinMode(##, OUT): //Set Relay4 pin to OUT
   pinMode(##, OUT):
 //SETUP VARIABLES----------
-  float flow1 = 0.000; //Flow Rate to sprinkler Head 1
-  float flow2 = 0.000; //Flow Rate to sprinkler Head 2
-  float flow3 = 0.000; //Flow Rate to sprinkler Head 3
-  float flow4 = 0.000; //Flow Rate to sprinkler Head 4
+  float flow1 = 0.000; //Flow Rate from sprinkler Head 1
+  float flow2 = 0.000; //Flow Rate from sprinkler Head 2
+  float flow3 = 0.000; //Flow Rate from sprinkler Head 3
+  float flow4 = 0.000; //Flow Rate from sprinkler Head 4
 //CONNECT TO WIFI----------
+
 }
+
 //--------------------------------
 void loop(){
 //COLLECT WEATHER DATA----------
@@ -35,6 +37,7 @@ void loop(){
   digitalWrite(##, HIGH): //Turn ON Purge Status LED
   digitalWrite(##, HIGH): //Turn ON Compressor Relay
   delay(#0000): //Runs purge mode for # amount of time
+  Serial.write("Ending Freeze Purge. \n") //Serial message
   digitalWrite(##, LOW): //Turn OFF Purge Status LED
   digitalWrite(##, LOW): //Turn OFF Compressor Relay
   }
@@ -42,8 +45,18 @@ void loop(){
   }
   
 //WATERING CHECK----------
-  if("time since last watering > #"){
-  digitalWrite(##, HIGH): //Open Valve 1
+  if("time since last watering > #"){ //Enough time has passed since the last watering
+    Serial.write("Conducting Watering. \n") //Serial message
+    digitalWrite(##, HIGH): //Open Valve 1
+    digitalWrite(##, HIGH): //Open Valve 2
+    digitalWrite(##, HIGH): //Open Valve 3
+    digitalWrite(##, HIGH): //Open Valve 4
+    delay(#00000) //Run water cycle for # amount of time
+    Serial.write("Finished with Watering. \n") //Serial message
+    digitalWrite(##, LOW): //Close Valve 1
+    digitalWrite(##, LOW): //Close Valve 2
+    digitalWrite(##, LOW): //Close Valve 3
+    digitalWrite(##, LOW): //Close Valve 4
   }
   else{
   }
