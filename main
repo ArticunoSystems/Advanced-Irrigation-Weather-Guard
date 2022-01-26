@@ -17,10 +17,11 @@ void setup(){
   pinMode(##, OUT): //Set Relay4 pin to OUT
   pinMode(##, OUT):
 //SETUP VARIABLES----------
-  float flow1 = 0.000; //Flow Rate from Zone 1
-  float flow2 = 0.000; //Flow Rate from Zone 2
-  float flow3 = 0.000; //Flow Rate from Zone 3
-  float flow4 = 0.000; //Flow Rate from Zone 4
+  float flowMain = 0.000; //Flow Rate from Main
+  float flow1 = 0.000; //Flow Rate from Zone 2
+  float flow2 = 0.000; //Flow Rate from Zone 3
+  float flow3 = 0.000; //Flow Rate from Zone 4
+  float sumZone = 0.000; //Flow Rate for Sum of Zones
 //CONNECT TO WIFI----------
 
 }
@@ -33,10 +34,10 @@ void loop(){
   //else, download weather data
 //UPDATE FLOW RATE DATA----------
   //import flow data from sensor controller (needs research)
-  flow1 = ___ //update flow data for head 1
-  flow2 = ___ //update flow data for head 2
-  flow3 = ___ //update flow data for head 3
-  flow4 = ___ //update flow data for head 4
+  flowMain = ___ //update flow data for Main Pipe
+  flow1 = ___ //update flow data for Zone 1
+  flow2 = ___ //update flow data for Zone 2
+  flow3 = ___ //update flow data for Zone 3
 //FREEZE CHECK----------
   if("Temperature below freezing){ //Temperature is too cold
   Serial.write("Conducting Freeze Purge. \n") //Serial message
@@ -48,26 +49,25 @@ void loop(){
   digitalWrite(##, LOW): //Turn OFF Compressor Relay
   }
   else{ //Temperature is warm enough
+  //WATERING CHECK----------
+    if("time since last watering > #"){ //Enough time has passed since the last watering
+      Serial.write("Conducting Watering. \n") //Serial message
+      digitalWrite(##, HIGH): //Open Valve 1
+      digitalWrite(##, HIGH): //Open Valve 2
+      digitalWrite(##, HIGH): //Open Valve 3
+      digitalWrite(##, HIGH): //Open Valve 4
+      delay(#00000) //Run water cycle for # amount of time
+      Serial.write("Finished with Watering. \n") //Serial message
+      digitalWrite(##, LOW): //Close Valve 1
+      digitalWrite(##, LOW): //Close Valve 2
+      digitalWrite(##, LOW): //Close Valve 3
+      digitalWrite(##, LOW): //Close Valve 4
+    }
+    else{
+    }
+  //LEAK & CLOG CHECK----------
+  sumZone = flow1 + flow2 + flow3:
+  if(sumZone /= flowMain)
+  //DISPLAY INFO----------
   }
-  
-//WATERING CHECK----------
-  if("time since last watering > #"){ //Enough time has passed since the last watering
-    Serial.write("Conducting Watering. \n") //Serial message
-    digitalWrite(##, HIGH): //Open Valve 1
-    digitalWrite(##, HIGH): //Open Valve 2
-    digitalWrite(##, HIGH): //Open Valve 3
-    digitalWrite(##, HIGH): //Open Valve 4
-    delay(#00000) //Run water cycle for # amount of time
-    Serial.write("Finished with Watering. \n") //Serial message
-    digitalWrite(##, LOW): //Close Valve 1
-    digitalWrite(##, LOW): //Close Valve 2
-    digitalWrite(##, LOW): //Close Valve 3
-    digitalWrite(##, LOW): //Close Valve 4
-  }
-  else{
-  }
-//LEAK & CLOG CHECK----------
-
-//DISPLAY INFO----------
-
 }
