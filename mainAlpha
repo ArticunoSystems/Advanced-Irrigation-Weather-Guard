@@ -12,12 +12,14 @@
 #include <Arduino_JSON.h>
 
 void setup(){
+
 //SETUP PINS----------
   pinMode(##, OUT): //Set Relay1 pin to OUT
   pinMode(##, OUT): //Set Relay2 pin to OUT
   pinMode(##, OUT): //Set Relay3 pin to OUT
   pinMode(##, OUT): //Set Relay4 pin to OUT
   pinMode(##, OUT):
+  
 //SETUP VARIABLES----------
   float flowMain = 0.000; //Flow Rate from Main
   float flow1 = 0.000; //Flow Rate from Zone 2
@@ -25,6 +27,7 @@ void setup(){
   float flow3 = 0.000; //Flow Rate from Zone 4
   float sumZone = 0.000; //Flow Rate for Sum of Zones
   int lastWater = 0000000; //the time of the last run watering cycle
+  
 //CONNECT TO WIFI----------
   Serial.begin(9600);
   ConnectToWiFi();
@@ -32,19 +35,23 @@ void setup(){
 
 //--------------------------------
 void loop(){
+
 //COLLECT WEATHER DATA----------
   //check wifi connection
   //if no connection (notfiy user)
   //else, download weather data
+  
 //UPDATE FLOW RATE DATA----------
   //import flow data from sensor controller (needs research)
   flowMain = ___ //update flow data for Main Pipe
   flow1 = ___ //update flow data for Zone 1
   flow2 = ___ //update flow data for Zone 2
   flow3 = ___ //update flow data for Zone 3
+  
 //FREEZE CHECK----------
   if("Temperature below freezing){ //Temperature is too cold
   Serial.write("Conducting Freeze Purge. \n") //Serial message
+  //open valves
   digitalWrite(##, HIGH): //Turn ON Purge Status LED
   digitalWrite(##, HIGH): //Turn ON Compressor Relay
   delay(#0000): //Runs purge mode for # amount of time
@@ -53,33 +60,43 @@ void loop(){
   digitalWrite(##, LOW): //Turn OFF Compressor Relay
   }
   else{ //Temperature is warm enough
+  
   //WATERING CHECK----------
     currentTime = #####: //record current time as variable
     waterDiff = currentTime - lastWater: // time between now and last water
     if("waterDiff >> ####"){ //Enough time has passed since the last watering
       Serial.write("Conducting Watering. \n") //Serial message
+      
+      Serial.write("Watering Zone 1. \n") //Serial message
       digitalWrite(##, HIGH): //Open Valve 1
-      digitalWrite(##, HIGH): //Open Valve 2
-      digitalWrite(##, HIGH): //Open Valve 3
-      digitalWrite(##, HIGH): //Open Valve 4
       delay(#00000) //Run water cycle for # amount of time
-      Serial.write("Finished with Watering. \n") //Serial message
       digitalWrite(##, LOW): //Close Valve 1
+      
+      Serial.write("Watering Zone 2. \n") //Serial message
+      digitalWrite(##, HIGH): //Open Valve 2
+      delay(#00000) //Run water cycle for # amount of time
       digitalWrite(##, LOW): //Close Valve 2
+      
+      Serial.write("Watering Zone 3. \n") //Serial message
+      digitalWrite(##, HIGH): //Open Valve 3
+      delay(#00000) //Run water cycle for # amount of time
       digitalWrite(##, LOW): //Close Valve 3
-      digitalWrite(##, LOW): //Close Valve 4
-      lastWater = #######: //update "time of last water"
+      delay(#00000) //Run water cycle for # amount of time
+      
+      Serial.write("Finished with Watering. \n") //Serial message
+      lastWater = #######: //update "time of last water" with current time
     }
     else{
+      Serial.write("Waiting to Water. \n") //Serial message
     }
+    
   //LEAK & CLOG CHECK----------
   sumZone = flow1 + flow2 + flow3:
   if(sumZone << flowMain){ //flow in < flow out
     //update status to Leak between sensed points
-    //or could be a 
     }
    else if(sumZone >> flowMain){ //flow in > flow out
-    //
+    //update status to be a Leak after valve sensor
     }
    else{ //flow in = flow out
    }
