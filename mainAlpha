@@ -22,6 +22,7 @@ void setup(){
   float flow2 = 0.000; //Flow Rate from Zone 3
   float flow3 = 0.000; //Flow Rate from Zone 4
   float sumZone = 0.000; //Flow Rate for Sum of Zones
+  
 //CONNECT TO WIFI----------
   Serial.begin(9600);
   ConnectToWiFi();
@@ -68,7 +69,16 @@ void loop(){
     }
   //LEAK & CLOG CHECK----------
   sumZone = flow1 + flow2 + flow3:
-  if(sumZone /= flowMain)
+  if(sumZone << flowMain){ //flow in < flow out
+    //update status to Leak between sensed points
+    //or could be a 
+    }
+   else if(sumZone >> flowMain){ //flow in > flow out
+    //
+    }
+   else{ //flow in = flow out
+   }
+  
   //DISPLAY INFO----------
   }
 }
