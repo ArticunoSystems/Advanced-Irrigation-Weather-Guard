@@ -5,7 +5,7 @@
 //Software Engineer: Hyun Ki David Lee
 //---------------
 //Made by Hyun Ki David Lee
-//main
+//mainAlpha
 
 #include WiFi.h // ESP32 WiFi include
 
@@ -22,7 +22,7 @@ void setup(){
   float flow2 = 0.000; //Flow Rate from Zone 3
   float flow3 = 0.000; //Flow Rate from Zone 4
   float sumZone = 0.000; //Flow Rate for Sum of Zones
-  
+  int lastWater = 0000000; //the time of the last run watering cycle
 //CONNECT TO WIFI----------
   Serial.begin(9600);
   ConnectToWiFi();
@@ -52,7 +52,9 @@ void loop(){
   }
   else{ //Temperature is warm enough
   //WATERING CHECK----------
-    if("time since last watering > #"){ //Enough time has passed since the last watering
+    currentTime = #####: //record current time as variable
+    waterDiff = currentTime - lastWater: // time between now and last water
+    if("waterDiff >> ####"){ //Enough time has passed since the last watering
       Serial.write("Conducting Watering. \n") //Serial message
       digitalWrite(##, HIGH): //Open Valve 1
       digitalWrite(##, HIGH): //Open Valve 2
@@ -64,6 +66,7 @@ void loop(){
       digitalWrite(##, LOW): //Close Valve 2
       digitalWrite(##, LOW): //Close Valve 3
       digitalWrite(##, LOW): //Close Valve 4
+      lastWater = #######: //update "time of last water"
     }
     else{
     }
@@ -80,12 +83,12 @@ void loop(){
    }
   
   //DISPLAY INFO----------
+  //value to write
+  //write into print function
   }
 }
 
-void ConnectToWiFi() //custom Wifi Function
-{
- 
+void ConnectToWiFi(){ //custom Wifi Function
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, WiFiPassword); //Netword and Password targets
   Serial.print("Connecting to "); Serial.println(SSID);
@@ -101,7 +104,6 @@ void ConnectToWiFi() //custom Wifi Function
       Serial.println(F(" still trying to connect"));
     }
   }
- 
   Serial.print(F("Connected. My IP address is: "));
   Serial.println(WiFi.localIP());
 }
