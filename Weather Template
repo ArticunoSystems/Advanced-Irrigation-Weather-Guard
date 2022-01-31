@@ -7,7 +7,7 @@ const char* password = "REPLACE_WITH_YOUR_PASSWORD";
 
 // Your Domain name with URL path or IP address with path
 String openWeatherMapApiKey = "524354176fc7e786cc3d2a113aa043ac";
-String city = "Porto";
+String city = "Bryan";
 String countryCode = "US";
 
 // THE DEFAULT TIMER IS SET TO 10 SECONDS FOR TESTING PURPOSES
