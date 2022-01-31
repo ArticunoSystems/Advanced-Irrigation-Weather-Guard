@@ -7,7 +7,9 @@
 //Made by Hyun Ki David Lee
 //mainAlpha
 
-#include WiFi.h // ESP32 WiFi include
+#include <WiFi.h> // ESP32 WiFi include
+#include <HTTPClient.h>
+#include <Arduino_JSON.h>
 
 void setup(){
 //SETUP PINS----------
