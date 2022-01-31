@@ -7,7 +7,7 @@
 //Made by Hyun Ki David Lee
 //main
 
-#include ___
+#include WiFi.h // ESP32 WiFi include
 
 void setup(){
 //SETUP PINS----------
@@ -23,7 +23,8 @@ void setup(){
   float flow3 = 0.000; //Flow Rate from Zone 4
   float sumZone = 0.000; //Flow Rate for Sum of Zones
 //CONNECT TO WIFI----------
-
+  Serial.begin(9600);
+  ConnectToWiFi();
 }
 
 //--------------------------------
@@ -70,4 +71,27 @@ void loop(){
   if(sumZone /= flowMain)
   //DISPLAY INFO----------
   }
+}
+
+void ConnectToWiFi() //custom Wifi Function
+{
+ 
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(SSID, WiFiPassword); //Netword and Password targets
+  Serial.print("Connecting to "); Serial.println(SSID);
+ 
+  uint8_t i = 0;
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print('.');
+    delay(500);
+ 
+    if ((++i % 16) == 0)
+    {
+      Serial.println(F(" still trying to connect"));
+    }
+  }
+ 
+  Serial.print(F("Connected. My IP address is: "));
+  Serial.println(WiFi.localIP());
 }
