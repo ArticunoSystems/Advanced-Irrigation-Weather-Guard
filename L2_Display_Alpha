@@ -1,0 +1,8 @@
+void LCD_print(text){
+  LCD_init(); //clear screen and reset cursor
+  i=0;
+  while(i < strlen(text)){
+    LCD_write(text[i]); //write selected letter (check for auto cursor move)
+    i += 1; //select next letter in string
+    }
+}
