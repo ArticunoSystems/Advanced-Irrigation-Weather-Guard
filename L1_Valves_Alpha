@@ -1,17 +1,22 @@
 //L1_Valves_Alpha
 
-void serOpenV1(){ //template for Opening the Valve with a Servo Motor
-  //
+void setup(){
+  pinMode(##, OUT): //Set Relay1 pin to OUT
+  pinMode(##, OUT): //Set Relay2 pin to OUT
+  pinMode(##, OUT): //Set Relay3 pin to OUT
+  pinMode(##, OUT): //Set Relay4 pin to OUT
 }
 
-void dcOpenV1(){ //template for Opening the Valve with a DC Motor
+void serOpenV1(valNum){ //template for Opening the Valve with a Servo Motor
+  //send frequency for open (90 degrees?)
+}
+
+void dcOpenV1(valNum){ //template for Opening the Valve with a DC Motor
   //set voltage direction
   //run for x amount of time (or encoder check?)
   //stop running
 }
 
-void solOpenV1(){ //template for Opening a Solenoid Valve
-  //set voltage direction
-  //run for x amount of time (or encoder check?)
-  //stop running
+void solOpenV1(valNum){ //template for Opening a Solenoid Valve
+  digitalWrite(##, HIGH): //Send Solenoid signal
 }
