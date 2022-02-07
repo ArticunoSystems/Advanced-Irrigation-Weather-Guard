@@ -1,0 +1,17 @@
+//L1_Valves_Alpha
+
+void serOpenV1(){ //template for Opening the Valve with a Servo Motor
+  //
+}
+
+void dcOpenV1(){ //template for Opening the Valve with a DC Motor
+  //set voltage direction
+  //run for x amount of time (or encoder check?)
+  //stop running
+}
+
+void solOpenV1(){ //template for Opening a Solenoid Valve
+  //set voltage direction
+  //run for x amount of time (or encoder check?)
+  //stop running
+}
