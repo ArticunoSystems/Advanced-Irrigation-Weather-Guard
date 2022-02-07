@@ -1,5 +1,5 @@
-float flow(){
+float flowSense(){
 }
 
-float temp(){
+float tempSense(){
 }
