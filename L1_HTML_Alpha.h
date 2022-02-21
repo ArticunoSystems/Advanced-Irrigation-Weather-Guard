@@ -20,5 +20,14 @@ const char INDEX_HTML[] =
         "<input type=\"submit\" value=\"Save\">"
       "</p>"
     "</form>"
+    "<h3>Node 1 Data</h3>"
+    "<form action=\"/\" method=\"post\">"
+      "<p>"
+        "<label>Flow Rate:&nbsp;</label>"
+        "<input maxlength=\"30\" name=\"ssid\"><br>"
+        "<label>Temperature:&nbsp;</label>"
+        "<
+      "</p>"
+    "</form>"
   "</body>"
 "</html>";
