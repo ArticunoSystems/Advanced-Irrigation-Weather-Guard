@@ -1,8 +1,5 @@
 #include <TaskScheduler.h>
 
-void BuzzCallback();
-Task Buzz(TASK_SECOND*2000 , 30, &BuzzCallback);
-
 Scheduler Buzzer;
 
 void Buzzinit(){
@@ -10,11 +7,12 @@ void Buzzinit(){
   digitalWrite(1, LOW); //initiate with a low signal
 }
 
-void BuzzCallback(){
-  digitalWrite(1, HIGH); //turn on Buzzer
+void BuzzToggle(){
+  digitalWrite(1, !digitalRead(1));//Toggle Buzzer
 }
+Task Buzz(TASK_SECOND*2000 , 30, &BuzzToggle);
 
-void setup () {
+void BZsetup () {
   Serial.begin(115200);
   Serial.println("Scheduler TEST");
   Buzzer.init();
@@ -27,6 +25,6 @@ void setup () {
 
 }
 
-void loop(){
+void BZloop(){
   Buzzer.execute();
 }

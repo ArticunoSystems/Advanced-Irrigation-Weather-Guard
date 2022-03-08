@@ -7,16 +7,16 @@
 //Made by Hyun Ki David Lee
 //TaskScheduler Wiki: https://github.com/arkhipenko/TaskScheduler/wiki
 
-#include "Buzz.h"
-#include "Internet.h"
-#include "Mesh.h"
-#include "Purge.h"
-#include "Water.h"
+#include "WEB.h"
+
 
 void setup(){
-  int x=0;// put your setup code here, to run once:
+  Serial.begin(115200);
 }
 
 void loop(){
-  int i=0;// put your main code here, to run repeatedly:
+  WiFiSetup();
+  delay(5000);
+  WiFiEnd();
+  delay(5000);
 }
