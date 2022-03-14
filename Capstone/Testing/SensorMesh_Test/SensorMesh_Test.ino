@@ -1,8 +1,6 @@
 
 #include "painlessMesh.h"
 #include <Arduino_JSON.h>
-#include "FLOW.h"
-#include "TEMP.h"
 
 // MESH Details
 #define   MESH_PREFIX     "GuardMesh" //name for your MESH
@@ -27,13 +25,9 @@ Task taskSendMessage(TASK_SECOND * 5 , TASK_FOREVER, &sendMessage);
 
 String getReadings () {
   JSONVar jsonReadings;
-  JSONVar FLOW;
-  JSONVar TEMP;
-  TEMP = (JSONVar)Temp;
-  FLOW = (JSONVar)flowRate;
   jsonReadings["node"] = nodeNumber;
-  jsonReadings["temp"] = TEMP;
-  jsonReadings["flow"] = FLOW;
+  jsonReadings["temp"] = 75;
+  jsonReadings["flow"] = 10;
   jsonReadings["pres"] = 30;
   readings = JSON.stringify(jsonReadings);
   return readings;
@@ -79,9 +73,6 @@ void nodeTimeAdjustedCallback(int32_t offset) {
 
 void setup() {
   Serial.begin(115200);
-  FlowSetup();
-  TempSetup();
-  
 //mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on
   mesh.setDebugMsgTypes( ERROR | STARTUP );  // set before init() so that you can see startup messages
 
@@ -96,18 +87,4 @@ void setup() {
 }
 void loop() {
   mesh.update();
-  Current_Time = millis();
-  if(Current_Time >= (Loop_Time + 1000)){
-    Loop_Time = Current_Time;
-    Liter_per_min = (Pulse_Count / 5.5);
-    flowRate = (Liter_per_min / 3.785);
-    Pulse_Count = 0; //gal/min
-    Serial.print(flowRate, DEC);
-    Serial.println(" Gal/min");
-  
-    Temp = TempLoop();
-    Serial.print("Temp: ");
-    Serial.print(Temp);
-    Serial.println(" F");
   }
-}

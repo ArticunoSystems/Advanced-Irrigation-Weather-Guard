@@ -1,8 +1,11 @@
 
 #include "painlessMesh.h"
 #include <Arduino_JSON.h>
-#include "FLOW.h"
-#include "TEMP.h"
+#include <LiquidCrystal_I2C.h>
+
+int lcdColumns = 16;
+int lcdRows = 2;
+LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows); 
 
 // MESH Details
 #define   MESH_PREFIX     "GuardMesh" //name for your MESH
@@ -27,14 +30,10 @@ Task taskSendMessage(TASK_SECOND * 5 , TASK_FOREVER, &sendMessage);
 
 String getReadings () {
   JSONVar jsonReadings;
-  JSONVar FLOW;
-  JSONVar TEMP;
-  TEMP = (JSONVar)Temp;
-  FLOW = (JSONVar)flowRate;
   jsonReadings["node"] = nodeNumber;
-  jsonReadings["temp"] = TEMP;
-  jsonReadings["flow"] = FLOW;
-  jsonReadings["pres"] = 30;
+  jsonReadings["temp"] = 3150;
+  jsonReadings["flow"] = 10;
+  jsonReadings["pres"] = .95;
   readings = JSON.stringify(jsonReadings);
   return readings;
 }
@@ -52,7 +51,7 @@ void receivedCallback( uint32_t from, String &msg ) {
   double temp = myObject["temp"];
   double flow = myObject["flow"];
   double pres = myObject["pres"];
-  Serial.print("Node: ");
+  Serial.print("Zone: ");
   Serial.println(node);
   Serial.print("Temperature: ");
   Serial.print(temp);
@@ -63,6 +62,36 @@ void receivedCallback( uint32_t from, String &msg ) {
   Serial.print("Pressure: ");
   Serial.print(pres);
   Serial.println(" hpa");
+  
+  lcd.setCursor(0, 0);
+  lcd.print("Zone");
+  lcd.print(node);
+  lcd.print("Temperature");
+  lcd.setCursor(0,1);
+  lcd.print(temp);
+  lcd.print(" F");
+  delay(3000);
+  lcd.clear();
+  
+  lcd.setCursor(0, 0);
+   lcd.print("Zone");
+  lcd.print(node);
+  lcd.print("Flow Rate");
+  lcd.setCursor(0,1);
+  lcd.print(flow);
+  lcd.print(" L/min");
+  delay(3000);
+  lcd.clear();
+
+  //lcd.setCursor(0, 0);
+  //lcd.print("Zone");
+  //lcd.print(node);
+  //lcd.print("Pressure");
+  //lcd.setCursor(0,1);
+  //lcd.print(pres);
+  //lcd.print(" psi");
+  //delay(3000);
+  //lcd.clear();
 }
 
 void newConnectionCallback(uint32_t nodeId) {
@@ -79,8 +108,10 @@ void nodeTimeAdjustedCallback(int32_t offset) {
 
 void setup() {
   Serial.begin(115200);
-  FlowSetup();
-  TempSetup();
+  // initialize LCD
+  lcd.init();
+  // turn on LCD backlight                      
+  lcd.backlight();
   
 //mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on
   mesh.setDebugMsgTypes( ERROR | STARTUP );  // set before init() so that you can see startup messages
@@ -96,18 +127,4 @@ void setup() {
 }
 void loop() {
   mesh.update();
-  Current_Time = millis();
-  if(Current_Time >= (Loop_Time + 1000)){
-    Loop_Time = Current_Time;
-    Liter_per_min = (Pulse_Count / 5.5);
-    flowRate = (Liter_per_min / 3.785);
-    Pulse_Count = 0; //gal/min
-    Serial.print(flowRate, DEC);
-    Serial.println(" Gal/min");
-  
-    Temp = TempLoop();
-    Serial.print("Temp: ");
-    Serial.print(Temp);
-    Serial.println(" F");
   }
-}
