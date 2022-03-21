@@ -15,6 +15,7 @@ void WiFiSetup()
 {
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
+  delay(100);
   Serial.println("Connecting to ");
   Serial.println(ssid);
 
@@ -26,13 +27,11 @@ void WiFiSetup()
     i=i+1;
   }
   if (WiFi.status() != WL_CONNECTED){
-    Serial.println("");
-    Serial.println("No WiFi");
+    Serial.println("\nNo WiFi");
   }
   if(WiFi.status() == WL_CONNECTED){
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
+    Serial.println("\nWiFi connected");
+    Serial.println("\nIP address: ");
     Serial.println(WiFi.localIP());
   }
 }

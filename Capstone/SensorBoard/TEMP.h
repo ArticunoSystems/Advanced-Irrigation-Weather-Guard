@@ -2,7 +2,7 @@
 //ESP32's ADC range is 0 to 4095 (0V to 3.3V)
 //According to TMP36's datasheet, the acceptable Temp range is -40C to 125C
 
-int TmpPin = 33; //Pin connection for TMP36
+int TmpPin = 13; //Pin connection for TMP36
 int Vout; //Output voltage from TMP36
 int TMP36C; //Desired Temp in C
 int TMP36F; //Desired Temp in F

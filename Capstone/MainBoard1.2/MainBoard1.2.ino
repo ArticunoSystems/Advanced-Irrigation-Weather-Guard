@@ -7,28 +7,19 @@
 //Made by Hyun Ki David Lee
 //TaskScheduler Wiki: https://github.com/arkhipenko/TaskScheduler/wiki
 //painlessMesh Wiki: https://gitlab.com/painlessMesh/painlessMesh/-/wikis/home
-//
 
-#include "MESH.h"
-#include "WEB.h"
-#include "FORECAST.h"
+#include "SENSE.h" //no PreReq includes
+#include "ONECALL.h" //no PreReq includes
+#include "MESH.h" //SENSE.h is a PreReq include
+#include "WEB.h" //no PreReq includes
 
-//Scheduler userScheduler;
-//void MeshTog();
-//Task Tog(TASK_MINUTE*1, TASK_FOREVER, &MeshTog);
-void WiFiTog(){
-  WiFiSetup();
-  ForecastLoop();
-  WiFiEnd();
-}
 
-Task Int(TASK_MINUTE, TASK_FOREVER, &WiFiTog);
+void WiFiTog(); //Specifaly so TaskScheduler doesn't give an error
+Task Int(TASK_MINUTE*10, TASK_FOREVER, &WiFiTog);
   
 void setup(){
   Serial.begin(115200);
   MeshSetup();
-  //userScheduler.addTask(Tog);
-  //Tog.enable();
   userScheduler.addTask(Int);
   Int.enable();
 }
@@ -37,10 +28,11 @@ void loop(){
   MeshLoop();
 }
 
-void MeshTog(){
-  Serial.println("!!!---Seperating from Mesh---!!!");
-  mesh.stop();
-  delay(1000);
-  Serial.println("!!!---Reconnecting to Mesh---!!!");
+void WiFiTog(){
+  Serial.println("---Leaving Mesh---");
+  WiFiSetup();
+  OneCallLoop();
+  WiFiEnd();
+  Serial.println("---Returning to Mesh---");
   MeshSetup();
 }

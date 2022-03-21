@@ -8,11 +8,17 @@
 //TaskScheduler Wiki: https://github.com/arkhipenko/TaskScheduler/wiki
 //painlessMesh Wiki: https://gitlab.com/painlessMesh/painlessMesh/-/wikis/home
 
-#include "MESH.h"
-#include "WEB.h"
+//#include "BUZZ.h" ////no PreReq includes
+#include "SENSE.h" //no PreReq includes
+#include "ONECALL.h" //no PreReq includes
+#include "MESH.h" //SENSE.h is a PreReq include
+#include "PURGE.h" //SENSE.h, MESH.h, BUZZ.h & ONECALL.h are PreReq includes
+#include "LCD.h" //SENSE.h, MESH.h, ONECALL.h, PURGE.h, WATER.h are PreReq includes
+#include "WEB.h" //no PreReq includes
 
-void WiFiTog();
-Task Int(TASK_MINUTE, TASK_FOREVER, &WiFiTog);
+
+void WiFiTog(); //Specifaly so TaskScheduler doesn't give an error
+Task Int(TASK_MINUTE*10, TASK_FOREVER, &WiFiTog);
   
 void setup(){
   Serial.begin(115200);
@@ -28,6 +34,7 @@ void loop(){
 void WiFiTog(){
   Serial.println("---Leaving Mesh---");
   WiFiSetup();
+  OneCallLoop();
   WiFiEnd();
   Serial.println("---Returning to Mesh---");
   MeshSetup();
