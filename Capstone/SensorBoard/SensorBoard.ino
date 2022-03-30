@@ -95,14 +95,13 @@ void setup() {
   taskSendMessage.enable();
 }
 void loop() {
-  mesh.update();
-  Current_Time = millis();
+  mesh.update();Current_Time = millis();
   if(Current_Time >= (Loop_Time + 1000)){
     Loop_Time = Current_Time;
     Liter_per_min = (Pulse_Count / 5.5);
     flowRate = (Liter_per_min / 3.785);
     Pulse_Count = 0; //gal/min
-    Serial.print(flowRate, DEC);
+    Serial.print(flowRate, 3);
     Serial.println(" Gal/min");
   
     Temp = TempLoop();
@@ -110,4 +109,5 @@ void loop() {
     Serial.print(Temp);
     Serial.println(" F");
   }
+  
 }

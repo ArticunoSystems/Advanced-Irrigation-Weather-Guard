@@ -1,9 +1,9 @@
 const int Output_Pin = 27;
 
 volatile int  Pulse_Count;
-unsigned int  Liter_per_min;
-unsigned int  Gal_per_min;
-int  flowRate;
+float  Liter_per_min;
+float  Gal_per_min;
+float  flowRate;
 unsigned long Current_Time, Loop_Time;
 
 void Detect_Rising_Edge(){ 
@@ -20,13 +20,13 @@ void FlowSetup(){
 
 void FlowLoop(){
    Current_Time = millis();
-   if(Current_Time >= (Loop_Time + 1000)){
+   if(Current_Time >= (Loop_Time + 3000)){
       Loop_Time = Current_Time;
       Liter_per_min = (Pulse_Count / 5.5);
       Gal_per_min = (Liter_per_min / 3.785);
       flowRate = Gal_per_min;
       Pulse_Count = 0;
-      Serial.print(flowRate, DEC);
+      Serial.print(flowRate, 3);
       Serial.println(" Gal/min");
    }
 }

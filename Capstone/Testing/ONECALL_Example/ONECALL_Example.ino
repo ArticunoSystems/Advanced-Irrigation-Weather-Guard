@@ -45,8 +45,8 @@ void setup() {
 void OneCallLoop(){
 //----OneCall Settings----
   OWOC.setOpenWeatherKey(ONECALLKEY);
-  //OWOC.setLatLon(myLAT, myLONG);
-  OWOC.setLatLon(myCITYID);
+  OWOC.setLatLon(myLAT, myLONG);
+  //OWOC.setLatLon(myCITYID);
   OWOC.setExcl(myEXCLUDES);
   OWOC.setHistory(myHISTORY);
   OWOC.setUnits(myUNITS);

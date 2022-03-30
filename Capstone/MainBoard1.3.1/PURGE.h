@@ -22,12 +22,12 @@ void PurgeSetup(){
 }
 
 void Purge(){
-  CurPur_Time = millis();
   if(purgeState != 1){
     Serial.println("----PURGING SYSTEM----");
     purgeState = 1;
     LoopPur_Time = millis();
   }
+  CurPur_Time = millis();
   if((CurPur_Time >= LoopPur_Time) && (CurPur_Time <= (LoopPur_Time + 1000))){ //Initiate Charge
     digitalWrite(waterMain,LOW);//CLOSE ALL Water Valves
     digitalWrite(z1Valve,LOW);
@@ -80,6 +80,9 @@ void Purge(){
   }
 }
 void PurgeCheck(){
+  if(purgeState == 1){
+    Purge();
+  }
   if((fTemp1 < freezeTemp) || (fTemp2 < freezeTemp) || (fTemp3 < freezeTemp)){
     if(purgeState != 2){
       if(PTmp == 0){

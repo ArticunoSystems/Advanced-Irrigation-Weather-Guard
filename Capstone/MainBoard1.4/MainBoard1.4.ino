@@ -26,6 +26,7 @@ void setup(){
   MeshSetup();
   userScheduler.addTask(Int);
   Int.enable();
+  PurgeSetup();
 }
 
 void loop(){
@@ -33,10 +34,10 @@ void loop(){
   if(purgeState !=1){
     MeshLoop();
   }
-  if(purgeState ==2){ //temporary state reset
+  if((purgeState ==2)&&(z1Temp>50)){ //temporary state reset
     purgeState=0;
   }
-  //PurgeCheck();
+  PurgeCheck();
 }
 
 void WiFiTog(){

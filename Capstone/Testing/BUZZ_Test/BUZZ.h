@@ -12,7 +12,7 @@ void BuzzLoop(){
   if(CurBz_Time >= (LoopBz_Time +1000 && BzIter < 30)){ //Toggle every 1000ms(1s)
     LoopBz_Time = CurBz_Time;
     digitalWrite(BZZpin, !digitalRead(BZZpin));//Toggle Buzzer
-    BzIter++
+    BzIter++;
   }
   if(BzIter >= 30){ //Exit after 30000ms(30s)
     digitalWrite(BZZpin, LOW);
