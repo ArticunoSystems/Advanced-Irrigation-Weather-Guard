@@ -7,7 +7,7 @@
 
 //----Global Weather Variables----
 float fTemp0,fTemp1,fTemp2,fTemp3,fTemp4;
-float fRain0,fRain1,fRain2,fRain3,fRain4,fRain5,fRain6,fRain7,fRain8,fRain9,fRain10;
+float fRain0,fRain1;
 
 //----OneCall Settings----
 #define ONECALLKEY "524354176fc7e786cc3d2a113aa043ac" //API Key for OpenWeather
@@ -51,7 +51,12 @@ void OneCallLoop(){
     }
     if (OWOC.forecast){
       //printf("\nForecast Temp Tomorrow : % .0f\n", OWOC.forecast[1].temperatureLow);
-      //printf("\nForecast Rain Tomorrow : % .0f\n", OWOC.forecast[1].rainVolume);
+      fRain0 = OWOC.forecast[0].rainVolume;
+      fRain1 = OWOC.forecast[1].rainVolume;
+      Serial.print("fRain0: ");
+      Serial.println(fRain0);
+      Serial.print("fRain1: ");
+      Serial.println(fRain1);
     }
     if (OWOC.hour){
       fTemp0 = OWOC.hour[0].temperature;

@@ -5,12 +5,12 @@ unsigned long CurPur_Time, LoopPur_Time; //Used for timing conditions
 //int ChargeLength = 1000;//how long to allow the compressor to charge
 int PTmp = 0; //for debugging using serial monitor
 
-int waterMain = 4; //GPIO for Main Water Valve
-int z1Valve = 16; //GPIO for Zone 1 Valve
-int z2Valve = 17; //GPIO for Zone 2 Valve
-int z3Valve = 5; //GPIO for Zone 3 Valve
-int airMain = 18; //GPIO for Air Compressor Valve
-int airPower = 19; //GPIO for Compressor Power Toggle
+int airPower = 12; //GPIO for Compressor Power Toggle, Relay1
+int airMain = 15; //GPIO for Air Compressor Valve, Relay2
+int waterMain = 4; //GPIO for Main Water Valve, Relay3
+int z1Valve = 16; //GPIO for Zone 1 Valve, Relay4
+int z2Valve = 17; //GPIO for Zone 2 Valve, Relay5
+int z3Valve = 18; //GPIO for Zone 3 Valve, Relay6
 
 void PurgeSetup(){
   pinMode(waterMain,OUTPUT);

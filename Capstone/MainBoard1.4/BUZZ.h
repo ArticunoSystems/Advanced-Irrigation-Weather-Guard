@@ -1,6 +1,6 @@
 unsigned long CurBz_Time, LoopBz_Time;
 int BzIter;
-int BZZpin = 32;
+int BZZpin = 13;
 
 void BuzzSetup(){
   pinMode(BZZpin, OUTPUT); //set Buzzer pin to output

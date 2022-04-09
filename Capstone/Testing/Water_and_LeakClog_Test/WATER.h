@@ -42,6 +42,7 @@ void Sprinkle(){
     digitalWrite(z2Valve,LOW);
     digitalWrite(z3Valve,LOW);
     digitalWrite(airPower,LOW);//Turn OFF Air Compressor
+    z1Check();
   }
   else if((CurWat_Time > (LoopWat_Time+3000)) && (CurWat_Time <= (LoopWat_Time+6000))){ //Water Zone 2
     if(WTmp == 2){
@@ -50,6 +51,7 @@ void Sprinkle(){
     }
     digitalWrite(z1Valve,LOW);
     digitalWrite(z2Valve,HIGH);
+    z2Check();
   }
   else if((CurWat_Time > (LoopWat_Time+6000)) && (CurWat_Time <= (LoopWat_Time+9000))){ //Water Zone 3
     if(WTmp == 3){
@@ -58,6 +60,7 @@ void Sprinkle(){
     }
     digitalWrite(z2Valve,LOW);
     digitalWrite(z3Valve,HIGH);
+    z3Check();
   }
   else if((CurWat_Time > (LoopWat_Time+9000)) && (CurWat_Time <= (LoopWat_Time+12000))){ //End Watering
     digitalWrite(z3Valve,LOW);
