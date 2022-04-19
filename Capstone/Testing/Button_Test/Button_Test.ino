@@ -1,17 +1,9 @@
-#include <LiquidCrystal_I2C.h>
-int lcdColumns = 16;
-int lcdRows = 2;
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 #include "BTTN.h"
-#include "MENU.h"
 
 void setup() {
   Serial.begin(115200);
-  lcd.init();
-  lcd.backlight();
   BTTNSetup();
-
 }
 
 void loop() {
@@ -28,6 +20,5 @@ void loop() {
   Serial.println(lvl4);
   Serial.println();
   BTTNLoop();
-  MenuLoop();
   delay(10);
 }

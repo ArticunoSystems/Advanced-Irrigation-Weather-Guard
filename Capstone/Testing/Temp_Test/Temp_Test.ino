@@ -5,7 +5,8 @@ void setup(){
 }
 
 void loop(){
-  int Temp;
-  Temp = TempLoop();
-  Serial.println(Temp);
+  //int Temp;
+  TempLoop();
+  //Serial.println(Temp);
+  delay(10);
 }
