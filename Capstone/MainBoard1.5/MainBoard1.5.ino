@@ -17,7 +17,8 @@
 #include "MESH.h" //SENSE.h is a PreReq include
 #include "PURGE.h" //SENSE.h, MESH.h, BUZZ.h & ONECALL.h are PreReq includes
 #include "WATER.h" //SENSE.h, LEAK.h, ONECALL.h, PURGE.h are prereqs
-
+#include "BTTN.h"
+#include "MENU.h"
 
 
 void WiFiTog(); //Specifaly so TaskScheduler doesn't give an error
@@ -29,10 +30,24 @@ void setup(){
   userScheduler.addTask(Int);
   Int.enable();
   PurgeSetup();
+  LCDsetup();
+  BTTNSetup();
 }
 
 void loop(){
-  //Updates from Sensor Board
+  Serial.print("current level: ");
+  Serial.println(curlvl);
+  Serial.print("level 1: ");
+  Serial.println(lvl1);
+  Serial.print("level 2: ");
+  Serial.println(lvl2);
+  Serial.print("level 3: ");
+  Serial.println(lvl3);
+  Serial.print("level 4: ");
+  Serial.println(lvl4);
+  Serial.println();
+  BTTNLoop();
+  MenuLoop();
   if(purgeState !=1){
     MeshLoop();
   }

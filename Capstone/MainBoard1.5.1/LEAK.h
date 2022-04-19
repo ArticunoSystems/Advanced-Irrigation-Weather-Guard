@@ -14,21 +14,21 @@ void LnCSetup(){
 void z1Check(){
   if(((tarFlow+tolFlow) >= z1Flow) && ((tarFlow-tolFlow) <= z1Flow)){
     if((z1Clog == true) || (z1Leak == true)){
-      Serial.println("z1 is good");
+      Serial.println("update: z1 good");
     }
     z1Leak = false;
     z1Clog = false;
   }
   if(z1Flow > (tarFlow+tolFlow)){
     if(z1Leak == false){
-      Serial.println("z1 Leak");
+      Serial.println("update: z1 Leak");
     }
     z1Leak = true;
     z1Clog = false;
   }
   if(z1Flow < (tarFlow-tolFlow)){
     if(z1Clog == false){
-      Serial.println("z1 Clog");
+      Serial.println("update: z1 Clog");
     }
     z1Leak = false;
     z1Clog = true;
@@ -37,21 +37,21 @@ void z1Check(){
 void z2Check(){
   if(((tarFlow+tolFlow) >= z2Flow) && ((tarFlow-tolFlow) <= z2Flow)){
     if((z2Clog == true) || (z2Leak == true)){
-      Serial.println("z2 is good");
+      Serial.println("update: z2 good");
     }
     z2Leak = false;
     z2Clog = false;
   }
   if(z2Flow > (tarFlow+tolFlow)){
     if(z2Leak == false){
-      Serial.println("z2 Leak");
+      Serial.println("update: z2 Leak");
     }
     z2Leak = true;
     z2Clog = false;
   }
   if(z2Flow < (tarFlow-tolFlow)){
     if(z2Clog == false){
-      Serial.println("z2 Clog");
+      Serial.println("update: z2 Clog");
     }
     z2Leak = false;
     z2Clog = true;
@@ -60,21 +60,21 @@ void z2Check(){
 void z3Check(){
   if(((tarFlow+tolFlow) >= z3Flow) && ((tarFlow-tolFlow) <= z3Flow)){
     if((z3Clog == true) || (z3Leak == true)){
-      Serial.println("z3 is good");
+      Serial.println("update: z3 good");
     }
     z3Leak = false;
     z3Clog = false;
   }
   if(z3Flow > (tarFlow+tolFlow)){
     if(z3Leak == false){
-      Serial.println("z3 Leak");
+      Serial.println("update: z3 Leak");
     }
     z3Leak = true;
     z3Clog = false;
   }
   if(z3Flow < (tarFlow-tolFlow)){
     if(z3Clog == false){
-      Serial.println("z3 Clog");
+      Serial.println("update: z3 Clog");
     }
     z3Leak = false;
     z3Clog = true;
