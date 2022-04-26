@@ -10,11 +10,10 @@ void lvl0Default(){
     LoopMen_Time = millis();
   }
   CurMen_Time = millis();
-  if ((CurMen_Time >= LoopMen_Time) && (CurMen_Time <= (LoopMen_Time + 2000))&&(MenLoop != 1)){
-    MenLoop = 1;
-    lcd.clear();
+  if ((CurMen_Time >= LoopMen_Time) && (CurMen_Time <= (LoopMen_Time + 2000))){
     lcd.setCursor(0,0);
-    lcd.print("System is ");
+    lcd.print("System is");
+    lcd.print("           ");
     lcd.setCursor(2,1);
     if(purgeState == 0){
       lcd.print("NOT Purged");
@@ -25,47 +24,49 @@ void lvl0Default(){
     if(purgeState == 2){
       lcd.print("PURGED");
     }
+    lcd.print("           ");
   }
-  else if ((CurMen_Time > (LoopMen_Time+2000)) && (CurMen_Time <= (LoopMen_Time+4000))&&(MenLoop != 2)){
-    MenLoop = 2;
-    lcd.clear();
+  if ((CurMen_Time > (LoopMen_Time+2000)) && (CurMen_Time <= (LoopMen_Time+4000))){
     lcd.setCursor(0,0);
     lcd.print("Zones Clogged:");
+    lcd.print("           ");
     lcd.setCursor(2,1);
     if((z1Clog == false)&&(z2Clog == false)&&(z2Clog == false)){
       lcd.print("NONE");
     }
     if(z1Clog == true){
-      lcd.print("1,");
+      lcd.print("1, ");
     }
     if(z2Clog == true){
-      lcd.print("2,");
+      lcd.print("2, ");
     }
     if(z3Clog == true){
-      lcd.print("3,");
+      lcd.print("3, ");
     }
+    lcd.print("           ");
   }
-  else if ((CurMen_Time > (LoopMen_Time+4000)) && (CurMen_Time <= (LoopMen_Time+6000))&&(MenLoop != 3)){
-    MenLoop = 3;
-    lcd.clear();
+  if ((CurMen_Time > (LoopMen_Time+4000)) && (CurMen_Time <= (LoopMen_Time+6000))){
     lcd.setCursor(0,0);
     lcd.print("Zones Leaking:");
+    lcd.print("           ");
     lcd.setCursor(2,1);
     if((z1Leak == false)&&(z2Leak == false)&&(z2Leak == false)){
       lcd.print("NONE");
     }
     if(z1Leak == true){
-      lcd.print("1,");
+      lcd.print("1, ");
     }
     if(z2Leak == true){
-      lcd.print("2,");
+      lcd.print("2, ");
     }
     if(z3Leak == true){
-      lcd.print("3,");
+      lcd.print("3, ");
     }
+    lcd.print("           ");
   }
   else if(CurMen_Time > (LoopMen_Time+6000)){
     LoopMen_Time = millis();
+    MenLoop = 0;
   }
   
 }
@@ -202,6 +203,7 @@ void lvl3Bzz(){
       lcd.setCursor(2,1);
       lcd.print("MUTED");
       BZZmute = true;
+      digitalWrite(BZZpin, LOW);
       break;
     case 2:
       lcd.setCursor(0,0);

@@ -33,11 +33,9 @@ void setup(){
   PurgeSetup();
   LCDsetup();
   lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Connected to:");
-  lcd.setCursor(2,1);
-  lcd.print(WiFi.localIP());
   delay(1000);
+  lcd.setCursor(0,0);
+  lcd.print("Articuno Systems");
   BTTNSetup();
 }
 
