@@ -33,7 +33,7 @@ void setup(){
   PurgeSetup();
   LCDsetup();
   lcd.clear();
-  delay(1000);
+  delay(500);
   lcd.setCursor(0,0);
   lcd.print("Articuno Systems");
   BTTNSetup();

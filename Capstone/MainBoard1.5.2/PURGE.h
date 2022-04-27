@@ -37,6 +37,7 @@ void Purge(){
   }
   CurPur_Time = millis();
   if((CurPur_Time >= LoopPur_Time) && (CurPur_Time <= ((ChargeTime*1)+(PurgeTime*0)+LoopPur_Time))){ //Initiate Charge
+    digitalWrite(airMain,LOW);
     digitalWrite(waterMain,LOW);//CLOSE ALL Water Valves
     digitalWrite(z1Valve,LOW);
     digitalWrite(z2Valve,LOW);

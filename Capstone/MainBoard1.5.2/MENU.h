@@ -28,6 +28,19 @@ void lvl0Default(){
   }
   if ((CurMen_Time > (LoopMen_Time+2000)) && (CurMen_Time <= (LoopMen_Time+4000))){
     lcd.setCursor(0,0);
+    lcd.print("System is");
+    lcd.print("           ");
+    lcd.setCursor(2,1);
+    if(waterState == true){
+      lcd.print("Watering");
+    }
+    if(waterState == false){
+      lcd.print("Not Watering");
+    }
+    lcd.print("           ");
+  }
+  if ((CurMen_Time > (LoopMen_Time+4000)) && (CurMen_Time <= (LoopMen_Time+6000))){
+    lcd.setCursor(0,0);
     lcd.print("Zones Clogged:");
     lcd.print("           ");
     lcd.setCursor(2,1);
@@ -45,13 +58,13 @@ void lvl0Default(){
     }
     lcd.print("           ");
   }
-  if ((CurMen_Time > (LoopMen_Time+4000)) && (CurMen_Time <= (LoopMen_Time+6000))){
-    lcd.setCursor(0,0);
-    lcd.print("Fcast Updated:  ");
-    lcd.setCursor(2,1);
-    lcd.print();
-    lcd.print("           ");
-  }
+//  if ((CurMen_Time > (LoopMen_Time+6000)) && (CurMen_Time <= (LoopMen_Time+8000))){
+//    lcd.setCursor(0,0);
+//    lcd.print("Fcast Updated:  ");
+//    lcd.setCursor(2,1);
+//    //lcd.print();
+//    lcd.print("           ");
+//  }
   if ((CurMen_Time > (LoopMen_Time+6000)) && (CurMen_Time <= (LoopMen_Time+8000))){
     lcd.setCursor(0,0);
     lcd.print("Rcast(0d,1d):   ");
@@ -138,7 +151,9 @@ void lvl3Man(){
       lcd.print("Starting Manual");
       lcd.setCursor(0,1);
       lcd.print("Purge");
-      Purge();
+      if(waterState == false){
+        Purge();
+      }
       break;
     case 1: //Manual Water
       lcd.setCursor(0,0);

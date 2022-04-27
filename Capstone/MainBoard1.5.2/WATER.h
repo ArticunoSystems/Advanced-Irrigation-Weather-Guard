@@ -87,6 +87,10 @@ void waterManual(){
 }
 void WaterCheck(){
   CurWat_Time = millis();
+  if(purgeState == 1){
+    waterState = false;
+    WTmp = 0;
+  }
   if((waterState == true)&&(purgeState != 1)){
     Sprinkle();
   }
@@ -99,6 +103,8 @@ void WaterCheck(){
   if((wMillisDif > waterInt)&&(purgeState !=1)){ //Time since last water comparison
     if(waterState == false){
       Serial.println("enough time has passed since last water");
+      Serial.println(fRain0);
+      Serial.println(fRain1);
       if((fRain0 < waterLimit) || (fRain1 < waterLimit)){ //Rain Forecast check
         if(WTmp == 0){
           Serial.println("Forecast meets watering criteria for the day");
