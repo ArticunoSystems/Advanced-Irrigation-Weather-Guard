@@ -28,7 +28,7 @@ int TempLoop(){
 //  Serial.println(Vout);
   volts = Vout*3300.0/4096.0;
   TMP36C = (volts-319.4)/10.0;
-  TMP36F1 = (TMP36C*9.0/5.0)+32.0-14.0;
+  TMP36F1 = (TMP36C*9.0/5.0)+32.0-9.0;
   if((TMP36F1>(0.95*TMP36F2))&&(TMP36F1<(1.05*TMP36F2))){
     if((TMP36F1>(0.95*TMP36F3))&&(TMP36F3<(1.05*TMP36F3))){
       if((TMP36F1>(0.95*TMP36F4))&&(TMP36F3<(1.05*TMP36F4))){

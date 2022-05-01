@@ -1,4 +1,5 @@
 #include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
 int lcdColumns = 16;
 int lcdRows = 2;
@@ -7,7 +8,8 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 void LCDsetup(){
   lcd.init(); //initialize LCD 
   lcd.backlight(); //turn on LCD backlight
-  lcd.clear(); 
+  lcd.clear();
+  Wire.setClock(100000);
 }
 
 void LCDprintR1(String txt){

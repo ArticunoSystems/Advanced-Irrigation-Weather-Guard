@@ -7,6 +7,7 @@
 //Made by Hyun Ki David Lee
 //TaskScheduler Wiki: https://github.com/arkhipenko/TaskScheduler/wiki
 //painlessMesh Wiki: https://gitlab.com/painlessMesh/painlessMesh/-/wikis/home
+boolean lcdUpToDate = false;
 
 #include "LCD.h" //no PreReq includes
 #include "BUZZ.h" ////no PreReq includes
@@ -20,6 +21,7 @@
 #include "BTTN.h"
 #include "MENU.h"
 
+bool WiFiCheck = false;
 
 void WiFiTog(); //Specifaly so TaskScheduler doesn't give an error
 Task Int(TASK_MINUTE*10, TASK_FOREVER, &WiFiTog);
@@ -31,29 +33,28 @@ void setup(){
   Int.enable();
   BuzzSetup();
   PurgeSetup();
+  BTTNSetup();
   LCDsetup();
   lcd.setCursor(0,0);
   lcd.print("Articuno Systems");
-  delay(500);
-  BTTNSetup();
 }
 
 void loop(){
-  BTTNLoop();
-  MenuLoop();
-  if(purgeState !=1){
+  if(WiFiCheck == false){
+    BTTNLoop();
+    MenuLoop();
+    //if(purgeState !=1){
     MeshLoop();
-  }
-  //if((purgeState ==2)&&(z1Temp>50)){ //temporary state reset
-  //  purgeState=0;
-  //}
-  PurgeCheck();
-  if(purgeState != 1){
-    WaterCheck();
+    //}
+    PurgeCheck();
+    if(purgeState != 1){
+      WaterCheck();
+    }
   }
 }
 
 void WiFiTog(){
+  WiFiCheck = true;
   Serial.println("---Leaving Mesh---");
   mesh.stop();
   WiFiSetup();
@@ -76,4 +77,5 @@ void WiFiTog(){
   }
   Serial.println("---Returning to Mesh---");
   MeshSetup();
+  WiFiCheck = false;
 }

@@ -10,7 +10,7 @@
 #define   MESH_PORT       5555 //default port
 
 //Number for this node
-int nodeNumber = 1;
+int nodeNumber = 3;
 
 //String to send to other nodes with sensor readings
 String readings;

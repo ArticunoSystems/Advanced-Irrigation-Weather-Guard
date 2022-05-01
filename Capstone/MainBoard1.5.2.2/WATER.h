@@ -1,13 +1,6 @@
 unsigned long CurWat_Time, LoopWat_Time; //Used for timing conditions
 int WTmp = 0; //for debugging using serial monitor
 
-//int airPower = 12; //GPIO for Compressor Power Toggle, Relay1
-//int airMain = 15; //GPIO for Air Compressor Valve, Relay2
-//int waterMain = 4; //GPIO for Main Water Valve, Relay3
-//int z1Valve = 16; //GPIO for Zone 1 Valve, Relay4
-//int z2Valve = 17; //GPIO for Zone 2 Valve, Relay5
-//int z3Valve = 18; //GPIO for Zone 3 Valve, Relay6
-
 int SprinkleTime = 30000;//how long to purge a specific zone
 int DelayTime = 2000;//how long to allow the compressor to charge
 
@@ -102,6 +95,7 @@ void Sprinkle(){
       WTmp = 0;
       waterState = false; //signifies system is NOT watering
       lastWater = millis();
+      CalFlow = false;
 //      if(CalFlow == true){
 //        int nodes = 0;
 //        int total = 0;
@@ -151,7 +145,7 @@ void WaterCheck(){
       Serial.println(fRain0);
       Serial.println(fRain1);
       if((fRain0 < waterLimit) || (fRain1 < waterLimit)){ //Rain Forecast check
-        if((z1Temp < freezeTemp) || (z2Temp < freezeTemp) || (z3Temp < freezeTemp) || (fTemp1 < freezeTemp) || (fTemp2 < freezeTemp) || (fTemp3 < freezeTemp)){
+        if((z1Temp > freezeTemp) || (z2Temp > freezeTemp) || (z3Temp > freezeTemp) || (fTemp1 > freezeTemp) || (fTemp2 > freezeTemp) || (fTemp3 > freezeTemp)){
           if(WTmp == 0){
             Serial.println("Forecast meets watering criteria for the day");
             WTmp++;

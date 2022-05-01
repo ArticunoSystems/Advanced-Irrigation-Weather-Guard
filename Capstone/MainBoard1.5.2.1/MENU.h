@@ -65,45 +65,33 @@ void lvl0Default(){
 //    //lcd.print();
 //    lcd.print("           ");
 //  }
-  if ((CurMen_Time > (LoopMen_Time+6000)) && (CurMen_Time <= (LoopMen_Time+8000))){
-    lcd.setCursor(0,0);
-    lcd.print("Rcast(0d,1d):   ");
-    lcd.setCursor(0,1);
-    if(fTemp1 != 999){
-      lcd.print(fRain0);
-      lcd.print(",");
-      lcd.print(fRain1);
-      lcd.print("          ");
-    }
-    lcd.print("           ");
-  }
   if ((CurMen_Time > (LoopMen_Time+8000)) && (CurMen_Time <= (LoopMen_Time+10000))){
     lcd.setCursor(0,0);
     lcd.print("Rcast(0d,1d):   ");
-    lcd.setCursor(0,1);
-    if(fTemp1 != 999){
-      lcd.print(fRain0);
-      lcd.print(",");
-      lcd.print(fRain1);
-      lcd.print("          ");
-    }
+    lcd.setCursor(2,1);
+    //if(fTemp1 != 999){
+    lcd.print(fRain0);
+    lcd.print(",");
+    lcd.print(fRain1);
+    //lcd.print("          ");
+    //}
     lcd.print("           ");
   }
   if ((CurMen_Time > (LoopMen_Time+10000)) && (CurMen_Time <= (LoopMen_Time+12000))){
     lcd.setCursor(0,0);
     lcd.print("Tcast(1h,2h,3h):");
-    lcd.setCursor(0,1);
-    if(fTemp1 != 999){
-      lcd.print((int)fTemp1);
-      lcd.print(",");
-      lcd.print((int)fTemp2);
-      lcd.print(",");
-      lcd.print((int)fTemp3);
-      lcd.print("      ");
-    }
-    if(fTemp1 == 999){
-      lcd.print("  None          ");
-    }
+    lcd.setCursor(2,1);
+    //if(fTemp1 != 999){
+    lcd.print((int)fTemp1);
+    lcd.print(",");
+    lcd.print((int)fTemp2);
+    lcd.print(",");
+    lcd.print((int)fTemp3);
+    lcd.print("      ");
+    //}
+    //if(fTemp1 == 999){
+    //  lcd.print("  None          ");
+    //}
   }
   else if(CurMen_Time > (LoopMen_Time+12000)){
     LoopMen_Time = millis();
@@ -118,29 +106,29 @@ void lvl3Zone(){
     case 0:
       lcd.setCursor(0,0);
       lcd.print("Z1:");
-      lcd.print(z1Flow);
-      lcd.print("gal/min   ");
-      lcd.setCursor(3,1);
-      lcd.print(z1Temp);
+      lcd.print(z1Temp,2);
       lcd.print(" F   ");
+      lcd.setCursor(3,1);
+      lcd.print(z1Flow,3);
+      lcd.print("gal/min   ");
       break;
     case 1:
       lcd.setCursor(0,0);
       lcd.print("Z2:");
-      lcd.print(z2Flow);
-      lcd.print("gal/min   ");
-      lcd.setCursor(3,1);
-      lcd.print(z2Temp);
+      lcd.print(z2Temp,2);
       lcd.print(" F   ");
+      lcd.setCursor(3,1);
+      lcd.print(z2Flow,3);
+      lcd.print("gal/min   ");
       break;
     case 2:
       lcd.setCursor(0,0);
       lcd.print("Z3:");
-      lcd.print(z3Flow);
-      lcd.print("gal/min   ");
-      lcd.setCursor(3,1);
-      lcd.print(z3Temp);
+      lcd.print(z3Temp,2);
       lcd.print(" F   ");
+      lcd.setCursor(3,1);
+      lcd.print(z3Flow,3);
+      lcd.print("gal/min   ");
       break;
   }
 }
