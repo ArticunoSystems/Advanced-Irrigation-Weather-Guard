@@ -9,7 +9,7 @@
 //painlessMesh Wiki: https://gitlab.com/painlessMesh/painlessMesh/-/wikis/home
 boolean lcdUpToDate = false;
 unsigned long fcast_Time;
-unsigned long CurMen_Time,LoopMen_Time;
+unsigned long CurMain_Time,LoopMain_Time;
 
 #include "LCD.h" //no PreReq includes
 #include "BUZZ.h" ////no PreReq includes
@@ -43,26 +43,21 @@ void setup(){
 
 void loop(){
   CurMain_Time = millis();
-  if ((CurMain_Time - LoopMain_Time) % 100 == 0) {
-    LoopMain_Time = CurMain_Time;
-    if(WiFiCheck == false){
-      BTTNLoop();
-      MenuLoop();
-      //if(purgeState !=1){
-      MeshLoop();
-      //}
-      PurgeCheck();
-      if(purgeState != 1){
-        WaterCheck();
-      }
-    }
-  }
+  MeshLoop();
+  //if ((CurMain_Time - LoopMain_Time) % 100 == 0) {
+    //LoopMain_Time = CurMain_Time;
+    BTTNLoop();
+    MenuLoop();
+    PurgeCheck();
+    WaterCheck();
+  //}
 }
 
 void WiFiTog(){
   WiFiCheck = true;
   Serial.println("---Leaving Mesh---");
   mesh.stop();
+  delay(100);
   WiFiSetup();
   lcd.clear();
   if(WiFi.status() == WL_CONNECTED){

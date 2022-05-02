@@ -29,7 +29,7 @@ void Sprinkle(){
       LoopWat_Time = millis();
     }
     CurWat_Time = millis();
-    if ((CurWat_Time - LoopWat_Time) % 100 == 0) { //only update lvl0 every 100ms
+    if ((CurWat_Time - LoopWat_Time) % 50 == 0) { //only update lvl0 every 100ms
       if((CurWat_Time >= LoopWat_Time) && (CurWat_Time <= ((DelayTime*0)+(SprinkleTime*1)+LoopWat_Time))){ //Water Zone 1
         if(WTmp == 1){
           Serial.println("Watering Zone 1");

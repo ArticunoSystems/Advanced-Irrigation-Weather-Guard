@@ -19,7 +19,7 @@ void TempSetup() {
   pinMode(TmpPin, INPUT);
 }
 
-int TempLoop(){
+float TempLoop(){
   Vout = analogRead(TmpPin);
   if(Vout < 300){
     Vout = 4095;

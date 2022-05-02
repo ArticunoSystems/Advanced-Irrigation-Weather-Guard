@@ -36,8 +36,8 @@ void Purge(){
     LoopPur_Time = millis();
   }
   CurPur_Time = millis();
-  if ((CurPur_Time - LoopPur_Time) % 100 == 0) { //only update lvl0 every 100ms
-    if((CurPur_Time >= LoopPur_Time) && (CurPur_Time <= ((ChargeTime*1)+(PurgeTime*0)+LoopPur_Time))){ //Initiate Charge
+  if ((CurPur_Time - LoopPur_Time) % 50 == 0) { //only update lvl0 every 50ms
+    if((CurPur_Time >= LoopPur_Time) && (CurPur_Time <= ((ChargeTime*2)+(PurgeTime*0)+LoopPur_Time))){ //Initiate Charge
       digitalWrite(airMain,LOW);
       digitalWrite(waterMain,LOW);//CLOSE ALL Water Valves
       digitalWrite(z1Valve,LOW);
@@ -46,11 +46,11 @@ void Purge(){
       digitalWrite(airPower,HIGH);//Turn ON Air Compressor
       BuzzLoop();
     }
-    if((CurPur_Time > ((ChargeTime*1)+(PurgeTime*0)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*1)+(PurgeTime*1)+LoopPur_Time))){ //Initiate Zone 1 Purge
+    if((CurPur_Time > ((ChargeTime*2)+(PurgeTime*0)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*2)+(PurgeTime*1)+LoopPur_Time))){ //Initiate Zone 1 Purge
       digitalWrite(airMain,HIGH); //OPEN Air Main Valve
       digitalWrite(z1Valve,HIGH); //OPEN Zone 1 Valve
     }
-    if((CurPur_Time > ((ChargeTime*1)+(PurgeTime*1)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*2)+(PurgeTime*1)+LoopPur_Time))){ //Initiate Charge
+    if((CurPur_Time > ((ChargeTime*2)+(PurgeTime*1)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*3)+(PurgeTime*1)+LoopPur_Time))){ //Initiate Charge
       if(PTmp == 1){
         Serial.println("Zone 1 Purged");
         PTmp++;
@@ -58,11 +58,11 @@ void Purge(){
       digitalWrite(airMain,LOW);  //CLOSE Air Main Valve
       digitalWrite(z1Valve,LOW);  //CLOSE Zone 1 Valve
     }
-    if((CurPur_Time > ((ChargeTime*2)+(PurgeTime*1)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*2)+(PurgeTime*2)+LoopPur_Time))){ //Inititate Zone 2 Purge
+    if((CurPur_Time > ((ChargeTime*3)+(PurgeTime*1)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*3)+(PurgeTime*2)+LoopPur_Time))){ //Inititate Zone 2 Purge
       digitalWrite(airMain,HIGH); //OPEN Air Main Valve
       digitalWrite(z2Valve,HIGH); //OPEN Zone 2 Valve
     }
-    if((CurPur_Time > ((ChargeTime*2)+(PurgeTime*2)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*3)+(PurgeTime*2)+LoopPur_Time))){ //Initiate Charge
+    if((CurPur_Time > ((ChargeTime*3)+(PurgeTime*2)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*4)+(PurgeTime*2)+LoopPur_Time))){ //Initiate Charge
       if(PTmp == 2){
         Serial.println("Zone 2 Purged");
         PTmp++;
@@ -70,12 +70,12 @@ void Purge(){
       digitalWrite(airMain,LOW);  //CLOSE Air Main Valve
       digitalWrite(z2Valve,LOW);  //CLOSE Zone 2 Valve
     }
-    if((CurPur_Time > ((ChargeTime*3)+(PurgeTime*2)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*3)+(PurgeTime*3)+LoopPur_Time))){ //Initiate Zone 3 Purge
+    if((CurPur_Time > ((ChargeTime*4)+(PurgeTime*2)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*4)+(PurgeTime*3)+LoopPur_Time))){ //Initiate Zone 3 Purge
       digitalWrite(airMain,HIGH); //OPEN Air Main Valve
       digitalWrite(z3Valve,HIGH); //OPEN Zone 3 Valve
       BuzzLoop();
     }
-    if((CurPur_Time > ((ChargeTime*3)+(PurgeTime*3)+LoopPur_Time)) && (CurPur_Time <= ((ChargeTime*4)+(PurgeTime*3)+LoopPur_Time))){ //delay before exit
+    if(CurPur_Time > ((ChargeTime*4)+(PurgeTime*3)+LoopPur_Time)){ //&& (CurPur_Time <= ((ChargeTime*5)+(PurgeTime*3)+LoopPur_Time))){ //delay before exit
       if(PTmp == 3){
         Serial.println("Zone 3 Purged");
         PTmp++;
@@ -84,16 +84,17 @@ void Purge(){
       digitalWrite(z3Valve,LOW);  //CLOSE Zone 3 Valve
       digitalWrite(airPower,LOW); //Turn OFF Air Compressor
       digitalWrite(BZZpin, LOW);
-    }
-    if(CurPur_Time > ((ChargeTime*4)+(PurgeTime*3)+LoopPur_Time)){ //End Purge Sequence
-      digitalWrite(airMain,LOW);  //CLOSE Air Main Valve
-      digitalWrite(z3Valve,LOW);  //CLOSE Zone 3 Valve
-      digitalWrite(airPower,LOW); //Turn OFF Air Compressor
-      digitalWrite(BZZpin, LOW);
       purgeState = 2;
       PTmp=0;
       Serial.println("----PURGE COMPLETED----");
     }
+//    if(CurPur_Time > ((ChargeTime*4)+(PurgeTime*3)+LoopPur_Time)){ //End Purge Sequence
+//      digitalWrite(airMain,LOW);  //CLOSE Air Main Valve
+//      digitalWrite(z3Valve,LOW);  //CLOSE Zone 3 Valve
+//      digitalWrite(airPower,LOW); //Turn OFF Air Compressor
+//      digitalWrite(BZZpin, LOW);
+      
+//    }
     else{
       Serial.println("Purge Timing Error");
     }
