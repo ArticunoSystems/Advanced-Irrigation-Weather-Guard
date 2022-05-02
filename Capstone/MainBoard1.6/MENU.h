@@ -189,7 +189,7 @@ void lvl3Man() {
           lcd.print("Water");
           waterManual();
         }
-        else if (purgeState == 1) {
+        else if ((purgeState == 1)||(waterState == false)) {
           lcd.setCursor(0, 0);
           lcd.print("Failed to Water");
           lcd.setCursor(0, 1);

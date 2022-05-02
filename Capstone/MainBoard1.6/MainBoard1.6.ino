@@ -9,7 +9,7 @@
 //painlessMesh Wiki: https://gitlab.com/painlessMesh/painlessMesh/-/wikis/home
 boolean lcdUpToDate = false;
 unsigned long fcast_Time;
-unsigned long CurMain_Time,LoopMain_Time;
+unsigned long CurMain_Time, LoopMain_Time;
 
 //----PURGE Variables----
 int freezeTemp = 55; //Temperature to initiate purge
@@ -33,7 +33,7 @@ int WTmp = 0; //for debugging using serial monitor
 int SprinkleTime = 30000;//how long to purge a specific zone
 int DelayTime = 2000;//how long to allow the compressor to charge
 
-int waterInt = 1000*30; //Minimum amount of time to wait between waterings
+int waterInt = 1000 * 30; //Minimum amount of time to wait between waterings
 int waterLimit = 1; //rain in inches to prevent watering
 int lastWater = 0; //millis time of last water sequence
 bool waterState = false; //If the system is currently being watered
@@ -56,9 +56,9 @@ int wMillisDif = 0;
 bool WiFiCheck = false;
 
 void WiFiTog(); //Specifaly so TaskScheduler doesn't give an error
-Task Int(TASK_MINUTE*5, TASK_FOREVER, &WiFiTog);
-  
-void setup(){
+Task Int(TASK_MINUTE * 10, TASK_FOREVER, &WiFiTog);
+
+void setup() {
   Serial.begin(115200);
   MeshSetup();
   userScheduler.addTask(Int);
@@ -67,38 +67,53 @@ void setup(){
   PurgeSetup();
   BTTNSetup();
   LCDsetup();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Articuno Systems");
 }
 
-void loop(){
+void loop() {
   CurMain_Time = millis();
   MeshLoop();
+  //if(WiFi.status() != WL_CONNECTED){
   BTTNLoop();
   MenuLoop();
   PurgeCheck();
   WaterCheck();
+  //}
 }
 
-void WiFiTog(){
+void WiFiTog() {
+  mesh.stop();
+  while ((purgeState == 1) || (waterState == true)) {
+    if (WiFiCheck == false) {
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Finishing Tasks!");
+      lcd.setCursor(0, 1);
+      lcd.print("Wait for WiFi");
+      WiFiCheck = true;
+    }
+    PurgeCheck();
+    WaterCheck();
+  }
   WiFiCheck = true;
   Serial.println("---Leaving Mesh---");
-  mesh.stop();
   delay(200);
   WiFiSetup();
   lcd.clear();
-  if(WiFi.status() == WL_CONNECTED){
-    lcd.setCursor(0,0);
+  if (WiFi.status() == WL_CONNECTED) {
+    lcd.setCursor(0, 0);
     lcd.print("Connected to:");
-    lcd.setCursor(2,1);
+    lcd.setCursor(2, 1);
     lcd.print(WiFi.localIP());
     OneCallLoop();
+    delay(10);
     sendFinal();
     fcast_Time = millis();
     WiFiEnd();
   }
-  else if(WiFi.status() != WL_CONNECTED){
-    lcd.setCursor(0,0);
+  else if (WiFi.status() != WL_CONNECTED) {
+    lcd.setCursor(0, 0);
     lcd.print("No Wifi");
     fTemp1 = 999;
     fTemp2 = 999;
