@@ -84,7 +84,7 @@ void WiFiTog(){
   WiFiCheck = true;
   Serial.println("---Leaving Mesh---");
   mesh.stop();
-  delay(100);
+  delay(200);
   WiFiSetup();
   lcd.clear();
   if(WiFi.status() == WL_CONNECTED){
@@ -93,7 +93,7 @@ void WiFiTog(){
     lcd.setCursor(2,1);
     lcd.print(WiFi.localIP());
     OneCallLoop();
-    //sendFinal();
+    sendFinal();
     fcast_Time = millis();
     WiFiEnd();
   }

@@ -9,7 +9,7 @@ void WiFiSetup()
 {
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
-  delay(10);
+  delay(100);
   Serial.println("Connecting to ");
   Serial.println(ssid);
 
@@ -27,14 +27,13 @@ void WiFiSetup()
     Serial.println("\nWiFi connected");
     Serial.println("\nIP address: ");
     Serial.println(WiFi.localIP());
-    sendFinal();
   }
 }
 
 void WiFiEnd(){
   Serial.println("Disconnecting Wifi");
   WiFi.disconnect();
-  delay(10);
+  delay(100);
   if (WiFi.status() != WL_CONNECTED){
     Serial.println("");
     Serial.println("Disconnect Success");
