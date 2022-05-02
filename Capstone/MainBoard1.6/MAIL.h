@@ -53,7 +53,7 @@ void strWrite() {
       Str10 = tmpStr;
       strCnt ++;
       break;
-    default;
+    default:
       strCnt = 1;
   }
 }
